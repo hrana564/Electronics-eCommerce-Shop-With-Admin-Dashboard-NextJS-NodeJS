@@ -84,3 +84,10 @@ model Wishlist {
   user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
 }
+
+model Visitor {
+  id        String   @id @default(uuid())
+  ipAddress String
+  userAgent String
+  visitDate DateTime @default(now())
+}

@@ -11,6 +11,7 @@ const orderRouter = require("./routes/customer_orders");
 const slugRouter = require("./routes/slugs");
 const orderProductRouter = require('./routes/customer_order_product');
 const wishlistRouter = require('./routes/wishlist');
+const visitorRouter = require('./routes/visitor')
 var cors = require("cors");
 
 const app = express();
@@ -35,6 +36,7 @@ app.use("/api/orders", orderRouter);
 app.use('/api/order-product', orderProductRouter);
 app.use("/api/slugs", slugRouter);
 app.use("/api/wishlist", wishlistRouter);
+app.use("/api/visitor", visitorRouter);
 
 
 const PORT = process.env.PORT || 3001;

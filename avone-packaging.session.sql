@@ -1,2 +1,1 @@
-
-select * from Product
+select * from Visitor

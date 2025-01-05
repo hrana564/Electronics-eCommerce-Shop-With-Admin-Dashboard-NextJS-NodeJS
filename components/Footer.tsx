@@ -7,12 +7,48 @@
 // Input parameters: no input parameters
 // Output: Footer component
 // *********************
+"use client";
 
+import React, { useEffect } from "react";
 import { navigation } from "@/lib/utils";
 import Image from "next/image";
-import React from "react";
 
 const Footer = () => {
+
+  useEffect(() => {
+    const logVisitor = async () => {
+      try {
+        // Fetch IP address
+        const ipResponse = await fetch("https://api64.ipify.org?format=json");
+        const ipData = await ipResponse.json();
+        const ipAddress = ipData.ip || "Unknown IP";
+
+        // Get User-Agent
+        const userAgent = navigator.userAgent || "Unknown User-Agent";
+
+        // Log visitor API call
+        const response = await fetch("http://localhost:3001/api/visitor", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ipAddress,
+            userAgent,
+          }),
+        });
+
+        if (!response.ok) {
+          console.error("Failed to log visitor");
+        }
+      } catch (error) {
+        console.error("Error logging visitor:", error);
+      }
+    };
+
+    logVisitor();
+  }, []);
+
   return (
     <footer className="bg-white" aria-labelledby="footer-heading">
       <div>
